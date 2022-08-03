@@ -2,6 +2,7 @@ package com.itcast.reggie.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public class Employee {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String name;
-    private String userName;
+    private String username;
     private String password;
     private String sex;
     private String idNumber;  //身份证号码
