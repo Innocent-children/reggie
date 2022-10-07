@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -47,7 +49,7 @@ public class EmployeeController {
         }
         //4.密码比对，如果不一致则返回登录失败结果
         if (!emp.getPassword().equals(password)) {
-            return R.error("登录失败!");
+            return R.error("账号或密码错误！");
         }
         //5.查看员工状态，如果为已禁用状态，则返回员工已禁用结果
         if (emp.getStatus() == 0) {
@@ -63,5 +65,26 @@ public class EmployeeController {
         //清理Session中保存的当前登录员工id
         request.getSession().removeAttribute("employee");
         return R.success("退出成功");
+    }
+
+    /**
+     *
+     * @param httpServletRequest
+     * @param employee
+     * @return
+     */
+    @PostMapping
+    public R<String> save(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
+        log.info("新增员工，员工信息：{}", employee.toString());
+        //设置初始密码为“123456”,需要md5加密
+        employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        //获得当前登录用户ID
+        Long empId = (Long) httpServletRequest.getSession().getAttribute("employee");
+        employee.setCreateUser(empId);
+        employee.setUpdateUser(empId);
+        employeeService.save(employee);
+        return R.success("新增员工成功！");
     }
 }
