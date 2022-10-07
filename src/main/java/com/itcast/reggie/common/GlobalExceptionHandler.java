@@ -22,6 +22,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public R<String> exceptionHandler(SQLIntegrityConstraintViolationException ex) {
         log.error(ex.getMessage());
-        return R.error("操作失败:{}" + ex.getMessage());
+        return R.error("操作失败:" + ex.getMessage());
     }
 }
