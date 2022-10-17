@@ -43,6 +43,7 @@ public class EmployeeController {
         LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Employee::getUsername, employee.getUsername());
         Employee emp = employeeService.getOne(queryWrapper);
+        List<Employee> emp1 = employeeService.list();
         //3.如果没有查询到则返回登录失败结果
         if (emp == null) {
             return R.error("登录失败!!");
