@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -59,6 +60,12 @@ public class EmployeeController {
         return R.success(emp);
     }
 
+    /**
+     * 员工退出
+     *
+     * @param request
+     * @return
+     */
     @PostMapping("/logout")
     public R<String> logout(HttpServletRequest request) {
         //清理Session中保存的当前登录员工id
@@ -67,6 +74,8 @@ public class EmployeeController {
     }
 
     /**
+     * 新增员工功能
+     *
      * @param httpServletRequest
      * @param employee
      * @return
@@ -110,6 +119,13 @@ public class EmployeeController {
         return R.success(pageInfo);
     }
 
+    /**
+     * 更新员工信息
+     *
+     * @param httpServletRequest
+     * @param employee
+     * @return
+     */
     @PutMapping
     public R<String> update(HttpServletRequest httpServletRequest, @RequestBody Employee employee) {
         log.info(employee.toString());

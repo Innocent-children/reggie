@@ -1,6 +1,7 @@
 package com.itcast.reggie.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +21,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public R<String> exceptionHandler(SQLIntegrityConstraintViolationException ex) {
+    public R<String> exceptionHandler(@NotNull SQLIntegrityConstraintViolationException ex) {
         log.error(ex.getMessage());
         if (ex.getMessage().contains("Duplicate entry")) {
             String[] message = ex.getMessage().split(" ");
