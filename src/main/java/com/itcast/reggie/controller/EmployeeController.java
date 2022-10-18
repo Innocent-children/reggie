@@ -4,6 +4,7 @@ package com.itcast.reggie.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.itcast.reggie.common.R;
 import com.itcast.reggie.entity.Employee;
 import com.itcast.reggie.service.EmployeeService;
@@ -43,7 +44,6 @@ public class EmployeeController {
         LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Employee::getUsername, employee.getUsername());
         Employee emp = employeeService.getOne(queryWrapper);
-        List<Employee> emp1 = employeeService.list();
         //3.如果没有查询到则返回登录失败结果
         if (emp == null) {
             return R.error("登录失败!!");
