@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
-    private EmployeeService employeeService;
+    public EmployeeService employeeService;
 
     /**
      * 员工登录
@@ -43,10 +43,9 @@ public class EmployeeController {
         LambdaQueryWrapper<Employee> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Employee::getUsername, employee.getUsername());
         Employee emp = employeeService.getOne(queryWrapper);
-        List<Employee> emp1 = employeeService.list();
         //3.如果没有查询到则返回登录失败结果
         if (emp == null) {
-            return R.error("登录失败!!");
+            return R.error("账号未注册!!");
         }
         //4.密码比对，如果不一致则返回登录失败结果
         if (!emp.getPassword().equals(password)) {
@@ -135,5 +134,21 @@ public class EmployeeController {
         employee.setUpdateUser(empId);
         employeeService.updateById(employee);
         return R.success("员工账号状态修改成功！");
+    }
+
+    /**
+     * 根据ID查询员工信息
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    public R<Employee> getById(@PathVariable Long id) {
+        log.info("根据ID查询员工信息...");
+        Employee employee = employeeService.getById(id);
+        if (employee == null) {
+            return R.error("没有查询到对应信息！");
+        }
+        return R.success(employee);
     }
 }
