@@ -14,6 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
+
     /**
      * 异常处理方法
      *
