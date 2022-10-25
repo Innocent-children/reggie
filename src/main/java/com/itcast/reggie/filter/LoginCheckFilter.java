@@ -1,6 +1,7 @@
 package com.itcast.reggie.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.itcast.reggie.common.BaseContext;
 import com.itcast.reggie.common.R;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -42,6 +43,8 @@ public class LoginCheckFilter implements Filter {
         //4.本次请求需要处理，若已经登录，直接放行
         if (httpServletRequest.getSession().getAttribute("employee") != null) {
             log.info("登陆成功，用户ID为{}", httpServletRequest.getSession().getAttribute("employee"));
+            Long empId = (Long) httpServletRequest.getSession().getAttribute("employee");
+            BaseContext.setCurrentId(empId);
             filterChain.doFilter(httpServletRequest, httpServletResponse);
             return;
         }
