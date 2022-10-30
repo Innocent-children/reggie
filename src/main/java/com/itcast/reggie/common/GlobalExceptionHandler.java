@@ -31,4 +31,17 @@ public class GlobalExceptionHandler {
         }
         return R.error("操作失败:" + ex.getMessage());
     }
+
+    /**
+     * 异常处理方法
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(CustomException.class)
+    public R<String> exceptionHandler(@NotNull CustomException ex) {
+        log.error(ex.getMessage());
+
+        return R.error("操作失败:" + ex.getMessage());
+    }
 }
