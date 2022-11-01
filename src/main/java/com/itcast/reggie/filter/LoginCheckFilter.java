@@ -31,7 +31,10 @@ public class LoginCheckFilter implements Filter {
                 "/employee/login",
                 "/employee/logout",
                 "/backend/**",
-                "/front/**"
+                "/front/**",
+                "/page/demo/upload.html",
+                "/common/download",
+                "/common/upload"
         };
         //2.判断本次请求是否需要处理
         //3.本次请求不需要处理
