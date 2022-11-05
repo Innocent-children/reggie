@@ -61,6 +61,7 @@ public class CommonController {
     }
 
     /**
+     * 文件下载
      * 上传之后紧接着执行的方法就是下载，就是将本地的图片展示到网页
      * fileInputStream取到了本地的图片，存储到形式是字节数组，非常的长
      * 将这个字节数组先给一个缓存区bytes，再由bytes给servletOutputStream，重复此过程
