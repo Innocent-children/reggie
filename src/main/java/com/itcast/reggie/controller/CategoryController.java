@@ -87,7 +87,7 @@ public class CategoryController {
         LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         //添加条件
         lambdaQueryWrapper.eq(category.getType() != null, Category::getType, category.getType());
-        //添加排序条件
+        //添加排序条件，优先使用sort进行排序，sort相同，按更新时间降序排列
         lambdaQueryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
         List<Category> list = categoryService.list(lambdaQueryWrapper);
         return R.success(list);
