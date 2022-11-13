@@ -47,6 +47,54 @@ public class DishController {
     }
 
     /**
+     * 根据ID删除分类
+     *
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public R<String> delete(String ids) {
+        if (!ids.contains(",")) {
+            log.info("删除菜品信息，ID为{}", ids);
+            dishService.removeById(ids);
+        } else {
+            String[] id = ids.split(",");
+            for (String i : id) {
+                dishService.removeById(Long.valueOf(i));
+            }
+        }
+        return R.success("菜品信息删除成功！");
+    }
+
+    /**
+     * 更改菜品售卖状态
+     *
+     * @param status
+     * @param ids
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    public R<String> update(@PathVariable String status, String ids) {
+        if (!ids.contains(",")) {
+            log.info("status:{},ids:{}", status, ids);
+            Dish dish = dishService.getById(ids);
+            dish.setStatus(dish.getStatus() == 1 ? 0 : 1);
+            dishService.updateById(dish);
+        } else {
+            String[] str = ids.split(",");
+            for (String s : str) {
+                log.info("status:{},ids:{}", status, s);
+                Dish dish = dishService.getById(s);
+                if (!Integer.valueOf(status).equals(dish.getStatus())) {
+                    dish.setStatus(Integer.valueOf(status));
+                    dishService.updateById(dish);
+                }
+            }
+        }
+        return R.success("更改菜品售卖状态成功！");
+    }
+
+    /**
      * 菜品信息分页查询
      *
      * @param page
@@ -95,6 +143,7 @@ public class DishController {
         DishDTO dishDTO = dishService.getByIdWithFlavor(id);
         return R.success(dishDTO);
     }
+
     /**
      * 更新菜品
      *
