@@ -1,14 +1,10 @@
 package com.itcast.reggie.common;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.itcast.reggie.entity.Employee;
-import com.itcast.reggie.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
