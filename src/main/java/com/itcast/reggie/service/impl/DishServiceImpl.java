@@ -47,7 +47,7 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 //            return item;
 //        }).collect(Collectors.toList());
         //保存菜品口味数据到菜品口味表dish_flavor
-        dishFlavorService.saveBatch(dishFlavorList);
+        dishFlavorService.saveBatch(dishFlavorListNew);
     }
 
     /**
